@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import (
     Any,
+    AsyncGenerator,
     AsyncIterator,
     Awaitable,
     Callable,
@@ -13,6 +14,7 @@ from typing import (
     Optional,
     Sequence,
     Tuple,
+    Union,
 )
 
 from typing_extensions import Protocol
@@ -24,7 +26,7 @@ from .topic import Topic
 _METADATA_LABEL = "_METADATA"
 
 
-class AsyncPublisher(Protocol):
+class AsyncPublisherProtocol(Protocol):
     """
     Convenience return type for async publisher methods. An async method that yields
     tuples of Labgraph topics and messages can be typed as returning this.
@@ -46,6 +48,10 @@ class AsyncPublisher(Protocol):
 
     def __aiter__(self) -> AsyncIterator[Tuple[Topic, Any]]:
         ...
+
+AsyncPublisher = Union[
+    AsyncPublisherProtocol, AsyncGenerator[Any, Tuple[Topic, Any]]
+]
 
 
 PublisherType = Callable[..., AsyncPublisher]
