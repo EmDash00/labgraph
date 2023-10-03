@@ -6,6 +6,8 @@ import platform
 import shutil
 import subprocess
 
+import distro
+
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext
 
@@ -14,7 +16,7 @@ CONFIG_FILE = {
     "Windows": "win.buckconfig",
 }.get(platform.system(), "unix.buckconfig")
 
-if platform.system() == 'Linux' and platform.linux_distribution()[0] == 'CentOS Linux':
+if platform.system() == 'Linux' and distro.linux_distribution()[0] == 'CentOS Linux':
     CONFIG_FILE = "manylinux.buckconfig"
 
 class BuckExtension(Extension):
