@@ -158,7 +158,6 @@ class Group(Module, metaclass=GroupMeta):
         # Use `connections()` to merge streams
         connections = list(self.connections())
         typeguard.check_type(
-            f"{self.__class__.__name__}.{self.connections.__name__}()",
             connections,
             Connections,
         )
