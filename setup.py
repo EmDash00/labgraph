@@ -37,6 +37,7 @@ setup(
     ext_modules=LIBRARY_EXTENSIONS,
     cmdclass={"build_ext": buck_build_ext},
     install_requires=[
+        "distro>=1.8.0"
         "appdirs>=1.4.4",
         "click>=7.1.2",
         "h5py>=3.3.0",
